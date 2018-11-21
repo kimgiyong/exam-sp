@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.sp.EXAM">
+	<select id="selectExamList" resultType="com.exam.sp.vo.ExamVO">
+		select * from mariadb.exam
+	</select>
+	<select id="selectExam" resultType="com.exam.sp.vo.ExamVO" parameterType="int">
+		select * from mariadb.exam
+		where num = #{num}
+	</select>
+	<insert id="insertExam" parameterType="com.exam.sp.vo.ExamVO">
+		insert into bdi.exam(name,age)
+		values(#{name},#{age})
+	</insert>
+	<update id="updateExam" parameterType="com.exam.sp.vo.ExamVO">
+		update bdi.exam
+		<set>
+			<if test="name!=null">name = #{name},</if>
+			<if test="age!=null">age = #{age}</if>
+		</set>
+		where num = #{num}
+	</update>
+	<delete id="deleteExam" parameterType="com.exam.sp.vo.ExamVO">
+		delete from bdi.exam
+		where num = #{num}
+	</delete>
+</mapper>
